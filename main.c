@@ -3,7 +3,6 @@
 
 int main (void)
 {
-  int i;
 
   function1(1);
 
