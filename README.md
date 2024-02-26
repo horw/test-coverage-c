@@ -1,0 +1,1 @@
+This repository is an example of test coverage for C with gcov, using make and cmake as examples.
