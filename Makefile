@@ -1,24 +1,16 @@
-CC = gcc
-CFLAGS = -Wall -Wextra -Wpedantic -fprofile-arcs -ftest-coverage
-LDFLAGS = -fprofile-arcs
+CC=gcc
+CGFLAGS=-Wall -pg
+CCOV=-fprofile-arcs -ftest-coverage
+LIBS = -lgcov
 
-SRCS = fnc.c main.c
-OBJS = $(SRCS:.c=.o)
-EXECUTABLE = coverage_test
+main: main.o fnc.o
+	$(CC) $(CFLAGS) main.o fnc.o -o main $(LIBS)
 
-.PHONY: all clean coverage
+main.o: main.c
+	$(CC) -c $(CFLAGS) $(CCOV) main.c
 
-all: $(EXECUTABLE)
-
-$(EXECUTABLE): $(OBJS)
-	$(CC) $(LDFLAGS) $^ -o $@
-
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+fnc.o: fnc.c
+	$(CC) -c $(CFLAGS) $(CCOV) fnc.c
 
 clean:
-	rm -f $(EXECUTABLE) $(OBJS) *.gcda *.gcno *.gcov
-
-coverage: $(EXECUTABLE)
-	./$(EXECUTABLE)
-	gcov fnc.c
+	rm *.gcov *.gcda *.gcno *.o
