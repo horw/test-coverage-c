@@ -1,3 +1,7 @@
+cmake_minimum_required(VERSION 3.22)
+
+set(CMAKE_C_FLAGS "-Wall -fprofile-arcs -ftest-coverage")
+
 project(HelloTestCoverage)
 
 add_library(FuncLib fnc.c)

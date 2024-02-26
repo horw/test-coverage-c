@@ -14,3 +14,9 @@ fnc.o: fnc.c
 
 clean:
 	rm *.gcov *.gcda *.gcno *.o
+
+rm:
+	rm -rf build
+
+md:
+	mkdir build
